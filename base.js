@@ -3223,8 +3223,6 @@
     beauty: { wow: 5.0, mom: -7.5 },
   }
 
-  window.$cardifyScripts = {}
-
   window.cardify = {
     showChart,
     hideChart,
@@ -3236,7 +3234,6 @@
     displayPaywall,
     loadCardifyIndustry,
     tooltips: { pelotonCustomTooltip },
-    loadScript,
   }
 
   document.addEventListener('DOMContentLoaded', showChartPreview)
