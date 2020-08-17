@@ -1194,22 +1194,19 @@
     const data = window.$cardifyScripts.industryData.filter(
       (entry) => entry.industry === industryKey,
     )
+    let labels = []
+    try {
+      labels = JSON.parse(data[0].dates)
+    } catch (error) {
+      console.log(error)
+    }
     console.log('Finished loading data for page ' + industryKey, data)
     window.cardify.showChart('#travel-graph-container', {
       bottomLabels,
       height: 350,
       type: 'line',
       data: {
-        labels: data.map((entry) => {
-          let dates
-          try {
-            dates = JSON.parse(entry.dates)
-          } catch (error) {
-            console.log(error)
-          }
-          console.log(dates)
-          return dates
-        }),
+        labels,
         datasets: data.map((entry) => {
           let data
           try {
