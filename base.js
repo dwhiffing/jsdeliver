@@ -1200,7 +1200,16 @@
       height: 350,
       type: 'line',
       data: {
-        labels: data.map((entry) => JSON.parse(entry.dates)),
+        labels: data.map((entry) => {
+          let dates
+          try {
+            dates = JSON.parse(entry.dates)
+          } catch (error) {
+            console.log(error)
+          }
+          console.log(dates)
+          return dates
+        }),
         datasets: data.map((entry) => {
           let data
           try {
