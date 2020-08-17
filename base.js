@@ -1,23 +1,257 @@
-(function (factory) {
-  typeof define === 'function' && define.amd ? define(factory) :
-  factory();
-}((function () { 'use strict';
+;(function (factory) {
+  typeof define === 'function' && define.amd ? define(factory) : factory()
+})(function () {
+  'use strict'
 
   const INDUSTRY_VALUES = {
-    'Travel': [100, 101, 100, 106, 105, 101, 86, 46, 20, 19, 14, 17, 17, 18, 24, 27, 28, 30, 37, 40, 44, 47, 48, 44],
-    'Financial Investments': [100, 115, 87, 98, 137, 161, 125, 169, 128, 114, 78, 126, 108, 95, 98, 88, 83, 73, 102, 104, 94, 80, 90, 100],
-    'Grocery and Wholesale': [100, 108, 108, 103, 111, 123, 143, 150, 109, 118, 117, 122, 127, 129, 133, 125, 126, 121, 123, 118, 121, 116, 132, 115],
-    'Apparel and Accessories': [100, 105, 116, 120, 118, 130, 115, 75, 61, 66, 68, 80, 86, 88, 97, 98, 107, 113, 111, 123, 127, 124, 130, 121],
-    'Restaurants': [100, 110, 104, 112, 113, 123, 107, 78, 54, 64, 56, 63, 66, 73, 79, 76, 79, 82, 94, 91, 95, 94, 105, 91],
-    'Gas Stations': [100, 102, 100, 102, 108, 111, 101, 82, 59, 62, 58, 63, 64, 66, 74, 72, 77, 82, 89, 87, 92, 94, 100, 91],
-    'Computers': [100, 112, 111, 114, 125, 132, 120, 132, 126, 133, 134, 168, 179, 163, 167, 158, 163, 154, 153, 151, 162, 141, 123, 121],
-    'Personal Care': [100, 115, 110, 111, 110, 130, 111, 76, 36, 38, 30, 33, 35, 39, 48, 50, 64, 66, 87, 86, 91, 96, 115, 93],
-    'Beauty': [100, 136, 107, 117, 126, 143, 103, 80, 64, 97, 63, 92, 124, 135, 163, 110, 123, 120, 127, 92, 98, 101, 133, 93],
-  };
+    Travel: [
+      100,
+      101,
+      100,
+      106,
+      105,
+      101,
+      86,
+      46,
+      20,
+      19,
+      14,
+      17,
+      17,
+      18,
+      24,
+      27,
+      28,
+      30,
+      37,
+      40,
+      44,
+      47,
+      48,
+      44,
+    ],
+    'Financial Investments': [
+      100,
+      115,
+      87,
+      98,
+      137,
+      161,
+      125,
+      169,
+      128,
+      114,
+      78,
+      126,
+      108,
+      95,
+      98,
+      88,
+      83,
+      73,
+      102,
+      104,
+      94,
+      80,
+      90,
+      100,
+    ],
+    'Grocery and Wholesale': [
+      100,
+      108,
+      108,
+      103,
+      111,
+      123,
+      143,
+      150,
+      109,
+      118,
+      117,
+      122,
+      127,
+      129,
+      133,
+      125,
+      126,
+      121,
+      123,
+      118,
+      121,
+      116,
+      132,
+      115,
+    ],
+    'Apparel and Accessories': [
+      100,
+      105,
+      116,
+      120,
+      118,
+      130,
+      115,
+      75,
+      61,
+      66,
+      68,
+      80,
+      86,
+      88,
+      97,
+      98,
+      107,
+      113,
+      111,
+      123,
+      127,
+      124,
+      130,
+      121,
+    ],
+    Restaurants: [
+      100,
+      110,
+      104,
+      112,
+      113,
+      123,
+      107,
+      78,
+      54,
+      64,
+      56,
+      63,
+      66,
+      73,
+      79,
+      76,
+      79,
+      82,
+      94,
+      91,
+      95,
+      94,
+      105,
+      91,
+    ],
+    'Gas Stations': [
+      100,
+      102,
+      100,
+      102,
+      108,
+      111,
+      101,
+      82,
+      59,
+      62,
+      58,
+      63,
+      64,
+      66,
+      74,
+      72,
+      77,
+      82,
+      89,
+      87,
+      92,
+      94,
+      100,
+      91,
+    ],
+    Computers: [
+      100,
+      112,
+      111,
+      114,
+      125,
+      132,
+      120,
+      132,
+      126,
+      133,
+      134,
+      168,
+      179,
+      163,
+      167,
+      158,
+      163,
+      154,
+      153,
+      151,
+      162,
+      141,
+      123,
+      121,
+    ],
+    'Personal Care': [
+      100,
+      115,
+      110,
+      111,
+      110,
+      130,
+      111,
+      76,
+      36,
+      38,
+      30,
+      33,
+      35,
+      39,
+      48,
+      50,
+      64,
+      66,
+      87,
+      86,
+      91,
+      96,
+      115,
+      93,
+    ],
+    Beauty: [
+      100,
+      136,
+      107,
+      117,
+      126,
+      143,
+      103,
+      80,
+      64,
+      97,
+      63,
+      92,
+      124,
+      135,
+      163,
+      110,
+      123,
+      120,
+      127,
+      92,
+      98,
+      101,
+      133,
+      93,
+    ],
+  }
 
-  const CHART_HEIGHT = 250;
+  const CHART_HEIGHT = 250
 
-  const CHART_COLORS = [ '#cf9ac3', '#407578', '#261a3a', '#3AB5BD', '#BC46A9', '#5746BC', '#D07736', '#3699D0' ];
+  const CHART_COLORS = [
+    '#cf9ac3',
+    '#407578',
+    '#261a3a',
+    '#3AB5BD',
+    '#BC46A9',
+    '#5746BC',
+    '#D07736',
+    '#3699D0',
+  ]
 
   function hasSomeParentTheClass(element, classname) {
     if (element && $(element).hasClass(classname)) {
@@ -30,10 +264,10 @@
   }
 
   function addStyles(code) {
-    const styleNode = document.createElement('style');
-    styleNode.innerHTML = code;
+    const styleNode = document.createElement('style')
+    styleNode.innerHTML = code
 
-    document.head.appendChild(styleNode);
+    document.head.appendChild(styleNode)
   }
 
   function simpleLineOptions() {
@@ -69,25 +303,25 @@
   function showChart(selector, config) {
     return $(selector).map(function () {
       /* Initialize chart */
-      let chart = null;
+      let chart = null
 
       /* Collect chart container information */
-      const container = this;
-      const width = $(container).width();
-      const height = config.height || CHART_HEIGHT;
+      const container = this
+      const width = $(container).width()
+      const height = config.height || CHART_HEIGHT
 
       /* Cut the wow mom chart component if presented */
-      const wowMomChart = container.querySelector('.wow-mom-chart');
-      wowMomChart && container.removeChild(wowMomChart);
+      const wowMomChart = container.querySelector('.wow-mom-chart')
+      wowMomChart && container.removeChild(wowMomChart)
 
       /* Clean the container */
-      container.innerHTML = '';
-      container.style.position = 'relative';
+      container.innerHTML = ''
+      container.style.position = 'relative'
 
       /* Add a legend to the top of it */
-      const legend = document.createElement('DIV');
-      legend.style.marginBottom = '28px';
-      legend.style.minHeight = config.legend.disableMinHegiht ? 'none' : '86px';
+      const legend = document.createElement('DIV')
+      legend.style.marginBottom = '28px'
+      legend.style.minHeight = config.legend.disableMinHegiht ? 'none' : '86px'
 
       legend.innerHTML = [
         '<h2 class="heading-small" style="margin-top: 0; margin-bottom: 16px; line-height: 24px; text-align: left">',
@@ -117,19 +351,19 @@
               '</div>',
             ].join('')
           : '',
-      ].join('');
+      ].join('')
 
-      container.appendChild(legend);
+      container.appendChild(legend)
 
       /**
        * V3 share buttons
        */
       if (config.share) {
-        const shareContainer = document.createElement('DIV');
+        const shareContainer = document.createElement('DIV')
         shareContainer.setAttribute(
           'style',
           'position: absolute; top: 10px; right: 10px; display: flex; align-items: center;',
-        );
+        )
 
         if (config.share.twitter) {
           shareContainer.innerHTML += [
@@ -138,7 +372,7 @@
             '<path d="M19.2114 2.47374C18.5054 2.78403 17.7516 2.99543 16.9579 3.09195C17.7667 2.60455 18.3889 1.83638 18.6833 0.919827C17.9247 1.36255 17.0839 1.68482 16.1889 1.8643C15.4742 1.09931 14.4555 0.620697 13.3244 0.620697C11.1571 0.620697 9.39975 2.37802 9.39975 4.54294C9.39975 4.85404 9.43564 5.15318 9.50105 5.43955C6.2385 5.2856 3.34686 3.71893 1.41167 1.35058C1.07105 1.92652 0.880406 2.59579 0.880406 3.32487C0.880406 4.68892 1.5744 5.88785 2.62575 6.59222C1.98202 6.57147 1.37657 6.39439 0.848498 6.10083V6.1495C0.848498 8.05199 2.19899 9.63859 3.99619 9.99994C3.66674 10.0885 3.31895 10.1363 2.96238 10.1363C2.7119 10.1363 2.4718 10.1124 2.23169 10.0677C2.73504 11.6256 4.18204 12.7615 5.90426 12.7934C4.56414 13.8456 2.86585 14.4726 1.03675 14.4726C0.725653 14.4726 0.415351 14.4542 0.103455 14.4192C1.8496 15.5311 3.90684 16.1812 6.1316 16.1812C13.3539 16.1812 17.2984 10.2017 17.2984 5.02476C17.2984 4.85803 17.2984 4.68972 17.2865 4.52221C18.0531 3.9726 18.7223 3.27781 19.2488 2.48969L19.2114 2.47374Z" fill="#261A3A" />',
             '</svg>',
             '</div>',
-          ].join('');
+          ].join('')
 
           addStyles(
             [
@@ -146,11 +380,11 @@
               '.share-twitter:hover { transform: scale(1.05); }',
               '.share-twitter:active { transform: scale(.95); }',
             ].join(''),
-          );
+          )
         }
 
         if (config.share.linkedin) {
-          const secretClass = 'share-linkedin';
+          const secretClass = 'share-linkedin'
 
           shareContainer.innerHTML += [
             '<div class="' + secretClass + '">',
@@ -158,7 +392,7 @@
             '<path d="M16.2012 15.6187H13.505V11.394C13.505 10.3865 13.4845 9.09008 12.1001 9.09008C10.6943 9.09008 10.4797 10.1863 10.4797 11.3196V15.6187H7.7835V6.93104H10.3734V8.11524H10.4083C10.7702 7.43249 11.6502 6.7118 12.9649 6.7118C15.6967 6.7118 16.2019 8.50973 16.2019 10.8501V15.6187H16.2012ZM4.73839 5.74228C3.87054 5.74228 3.17336 5.0398 3.17336 4.17573C3.17336 3.31242 3.87129 2.6107 4.73839 2.6107C5.60322 2.6107 6.30419 3.31242 6.30419 4.17573C6.30419 5.0398 5.60247 5.74228 4.73839 5.74228ZM6.09026 15.6187H3.38653V6.93104H6.09026V15.6187ZM17.5499 0.103455H2.03315C1.29046 0.103455 0.689636 0.690627 0.689636 1.41511V16.9987C0.689636 17.7239 1.29046 18.3104 2.03315 18.3104H17.5477C18.2896 18.3104 18.8965 17.7239 18.8965 16.9987V1.41511C18.8965 0.690627 18.2896 0.103455 17.5477 0.103455H17.5499Z" fill="#261A3A"/>',
             '</svg>',
             '</div>',
-          ].join('');
+          ].join('')
 
           addStyles(
             [
@@ -168,10 +402,10 @@
               '.' + secretClass + ':hover { transform: scale(1.05); }',
               '.' + secretClass + ':active { transform: scale(.95); }',
             ].join(''),
-          );
+          )
         }
 
-        container.appendChild(shareContainer);
+        container.appendChild(shareContainer)
 
         $(shareContainer.querySelectorAll('.share-twitter')).on(
           'click',
@@ -180,13 +414,13 @@
               'https://twitter.com/share?url=' +
               encodeURIComponent(window.location.href) +
               '&text=' +
-              encodeURIComponent(document.title);
+              encodeURIComponent(document.title)
             const options =
-              'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600';
+              'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600'
 
-            window.open(url, '', options);
+            window.open(url, '', options)
           },
-        );
+        )
 
         $(shareContainer.querySelectorAll('.share-linkedin')).on(
           'click',
@@ -195,13 +429,13 @@
               'http://www.linkedin.com/shareArticle?mini=true&url=' +
               encodeURIComponent(window.location.href) +
               '&title=' +
-              encodeURIComponent(document.title); // + summary & title
+              encodeURIComponent(document.title) // + summary & title
             const options =
-              'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600';
+              'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600'
 
-            window.open(url, '', options);
+            window.open(url, '', options)
           },
-        );
+        )
       }
 
       /**
@@ -209,14 +443,14 @@
        */
       if (config.selector) {
         /* Create drodowns container */
-        const dropdownsContainer = document.createElement('DIV');
+        const dropdownsContainer = document.createElement('DIV')
         dropdownsContainer.setAttribute(
           'style',
           'display: flex; align-items: center; justify-content: flex-start; margin-bottom: 24px;',
-        );
+        )
 
         /* Create dropdowns */
-        const selectClass = 'select-' + Math.random().toString().split('.')[1];
+        const selectClass = 'select-' + Math.random().toString().split('.')[1]
         dropdownsContainer.innerHTML = [
           /* TODO label feature (e.g. compare at) */
           '',
@@ -252,9 +486,9 @@
               ].join(''),
             )
             .join(''),
-        ].join('');
+        ].join('')
 
-        container.appendChild(dropdownsContainer);
+        container.appendChild(dropdownsContainer)
 
         /* Add some styling */
         addStyles([
@@ -262,82 +496,84 @@
           '.' +
             selectClass +
             ' .w-dropdown-list { position: absolute; top: 0; transition: all 200ms ease; }',
-        ]);
+        ])
 
         const openDropdown = (node) => {
-          $(node.querySelector('.w-dropdown-list')).css('top', '54px');
-          $(node.querySelector('.w-dropdown-list')).css('opacity', '1');
-          $(node.querySelector('.w-dropdown-list')).css('pointer-events', 'all');
-        };
+          $(node.querySelector('.w-dropdown-list')).css('top', '54px')
+          $(node.querySelector('.w-dropdown-list')).css('opacity', '1')
+          $(node.querySelector('.w-dropdown-list')).css('pointer-events', 'all')
+        }
 
         const closeDropdown = (node) => {
-          $(node.querySelector('.w-dropdown-list')).css('top', '0');
-          $(node.querySelector('.w-dropdown-list')).css('opacity', '0');
-          $(node.querySelector('.w-dropdown-list')).css('pointer-events', 'none');
-        };
+          $(node.querySelector('.w-dropdown-list')).css('top', '0')
+          $(node.querySelector('.w-dropdown-list')).css('opacity', '0')
+          $(node.querySelector('.w-dropdown-list')).css(
+            'pointer-events',
+            'none',
+          )
+        }
 
         let dropdownsValue = config.selector.dropdowns.map(
           (config) => config.default,
-        );
+        )
 
         /* Make dropdowns drop down */
         $(
           container.querySelectorAll('.' + selectClass + ' .w-dropdown-toggle'),
         ).on('click', function (e) {
-          openDropdown(this.parentNode);
-        });
+          openDropdown(this.parentNode)
+        })
 
         /* Make options clickable */
-        $(container.querySelectorAll('.' + selectClass + ' .w-dropdown-link')).on(
-          'click',
-          function (e) {
-            closeDropdown(this.parentNode.parentNode);
+        $(
+          container.querySelectorAll('.' + selectClass + ' .w-dropdown-link'),
+        ).on('click', function (e) {
+          closeDropdown(this.parentNode.parentNode)
 
-            const value = this.getAttribute('data-value');
-            const index = this.getAttribute('data-index');
+          const value = this.getAttribute('data-value')
+          const index = this.getAttribute('data-index')
 
-            dropdownsValue[index] = value;
-            config.selector.onChange(dropdownsValue, chart);
+          dropdownsValue[index] = value
+          config.selector.onChange(dropdownsValue, chart)
 
-            const label = (
-              config.selector.dropdowns[index].options
-                .filter((option) => option.value === value)
-                .pop() || {}
-            ).label;
-            $(this.parentNode.parentNode.querySelector('.dropdown-text')).text(
-              label,
-            );
-          },
-        );
+          const label = (
+            config.selector.dropdowns[index].options
+              .filter((option) => option.value === value)
+              .pop() || {}
+          ).label
+          $(this.parentNode.parentNode.querySelector('.dropdown-text')).text(
+            label,
+          )
+        })
 
         $(document.body).on('click', function (e) {
           if (!hasSomeParentTheClass(e.target, 'w-dropdown-toggle')) {
             $('.' + selectClass).each(function () {
-              closeDropdown(this);
-            });
+              closeDropdown(this)
+            })
           }
-        });
+        })
       }
 
       /* Create a canvas for chart */
-      const canvas = document.createElement('CANVAS');
+      const canvas = document.createElement('CANVAS')
 
-      canvas.width = width;
-      canvas.height = height;
-      canvas.style.width = '100%';
-      canvas.style.height = height + 'px';
-      container.appendChild(canvas);
+      canvas.width = width
+      canvas.height = height
+      canvas.style.width = '100%'
+      canvas.style.height = height + 'px'
+      container.appendChild(canvas)
 
       /* Append wow mom chart component if presented */
-      wowMomChart && container.appendChild(wowMomChart);
+      wowMomChart && container.appendChild(wowMomChart)
 
       /* TODO V3 bottom labels go here */
       if (config.bottomLabels) {
-        const bottomLabelsContainer = document.createElement('DIV');
+        const bottomLabelsContainer = document.createElement('DIV')
         bottomLabelsContainer.setAttribute(
           'style',
           'margin-top: 12px; display: flex; align-items: center; justify-content: center;',
-        );
+        )
 
         config.bottomLabels.forEach((label, index) => {
           bottomLabelsContainer.innerHTML += [
@@ -349,14 +585,14 @@
               label +
               '</span>',
             '</div>',
-          ].join('');
-        });
+          ].join('')
+        })
 
-        container.appendChild(bottomLabelsContainer);
+        container.appendChild(bottomLabelsContainer)
       }
 
       /* Initialize chart */
-      chart = new Chart(canvas.getContext('2d'), config);
+      chart = new Chart(canvas.getContext('2d'), config)
 
       return chart
     })
@@ -364,41 +600,42 @@
 
   function hideChart(selector) {
     $(selector).each(function () {
-      this.remove();
-    });
+      this.remove()
+    })
   }
 
   function showChartPreview() {
     const COLORS = {
       red: '#CE4645',
       green: '#407578',
-    };
+    }
 
     $(function () {
       $('.graph-placeholder').each(function () {
-        const container = document.createElement('div');
-        container.setAttribute('style', 'height: 100%; width: 100%;');
-        this.style.padding = '20px';
-        this.appendChild(container);
+        const container = document.createElement('div')
+        container.setAttribute('style', 'height: 100%; width: 100%;')
+        this.style.padding = '20px'
+        this.appendChild(container)
 
-        const industryName = $(this).attr('data-industry');
-        const values = INDUSTRY_VALUES[industryName];
+        const industryName = $(this).attr('data-industry')
+        const values = INDUSTRY_VALUES[industryName]
 
         if (!values) {
-          console.error('Industry ', industryName, ' is unknown.');
+          console.error('Industry ', industryName, ' is unknown.')
           return
         }
 
-        const { width, height } = container.getBoundingClientRect();
-        const canvas = document.createElement('CANVAS');
-        canvas.width = width;
-        canvas.height = height;
-        canvas.style.width = '100%';
-        canvas.style.height = height + 'px';
+        const { width, height } = container.getBoundingClientRect()
+        const canvas = document.createElement('CANVAS')
+        canvas.width = width
+        canvas.height = height
+        canvas.style.width = '100%'
+        canvas.style.height = height + 'px'
 
-        container.appendChild(canvas);
+        container.appendChild(canvas)
 
-        const positive = values[values.length - 1] - values[values.length - 2] > 0;
+        const positive =
+          values[values.length - 1] - values[values.length - 2] > 0
 
         new Chart(canvas.getContext('2d'), {
           type: 'line',
@@ -444,65 +681,65 @@
               ],
             },
           },
-        });
-      });
-    });
+        })
+      })
+    })
   }
 
   /**
    * Paywall stuff
    */
-  let __overlayRef = null;
-  let __formRef = null;
+  let __overlayRef = null
+  let __formRef = null
   function showPaywall() {
-    document.body.style.transform = 'none';
+    document.body.style.transform = 'none'
 
     if (__overlayRef === null) {
-      const overlay = document.createElement('DIV');
-      const form = document.getElementById('report-locked');
+      const overlay = document.createElement('DIV')
+      const form = document.getElementById('report-locked')
 
       if (!form) return
 
       overlay.setAttribute(
         'style',
         'position: fixed; height: 100vh; width: 100vw; bottom: 0; z-index: 9999; transition: all 200ms ease; background: rgba(53,53,53,0); opacity: 1;',
-      );
+      )
       form.setAttribute(
         'style',
         'position: absolute; opacity: 0; bottom: -40px; left: 0; width: 100%; height: 65vh; display: block; transition: all 200ms ease;',
-      );
+      )
 
-      document.body.appendChild(overlay);
-      overlay.appendChild(form);
+      document.body.appendChild(overlay)
+      overlay.appendChild(form)
 
-      __overlayRef = overlay;
-      __formRef = form;
+      __overlayRef = overlay
+      __formRef = form
     }
 
-    __overlayRef.style.display = 'block';
-    __overlayRef.style.opacity = '1.0';
-    __overlayRef.style.pointerEvents = 'all';
+    __overlayRef.style.display = 'block'
+    __overlayRef.style.opacity = '1.0'
+    __overlayRef.style.pointerEvents = 'all'
 
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden'
 
     setTimeout(() => {
-      __overlayRef.style.background = 'rgba(53, 53, 53, 0.77)';
-      __formRef.style.opacity = '1';
-      __formRef.style.bottom = '0px';
-    }, 50);
+      __overlayRef.style.background = 'rgba(53, 53, 53, 0.77)'
+      __formRef.style.opacity = '1'
+      __formRef.style.bottom = '0px'
+    }, 50)
   }
 
   function hidePaywall() {
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = 'unset'
 
-    __overlayRef.style.opacity = '0.0';
-    __overlayRef.style.pointerEvents = 'none';
-    __formRef.style.opacity = '0';
-    __formRef.style.bottom = '-40px';
+    __overlayRef.style.opacity = '0.0'
+    __overlayRef.style.pointerEvents = 'none'
+    __formRef.style.opacity = '0'
+    __formRef.style.bottom = '-40px'
 
     setTimeout(() => {
-      __overlayRef.style.display = 'none';
-    }, 50);
+      __overlayRef.style.display = 'none'
+    }, 50)
   }
 
   /**
@@ -514,90 +751,91 @@
   function displayPaywall(options = {}, hideCallback) {
     /* Do not show the paywal if user comes from email */
     if (new URLSearchParams(window.location.search).get('medium') === 'email') {
-      localStorage.setItem('form-submitted', 'true');
-      window.history.replaceState(null, null, window.location.pathname);
+      localStorage.setItem('form-submitted', 'true')
+      window.history.replaceState(null, null, window.location.pathname)
     }
 
     /* Do not show the paywall if it was ever submitted */
     if (localStorage.getItem('form-submitted') === 'true') {
-      hideCallback && hideCallback(true);
+      hideCallback && hideCallback(true)
       return
     }
 
-    showPaywall();
+    showPaywall()
 
     /* Hide the paywall after submit */
     $('#email-form-overlay').on('submit', function () {
       setTimeout(() => {
         if (
-          $('#email-form-overlay .success-message.w-form-done').css('display') ===
-          'block'
+          $('#email-form-overlay .success-message.w-form-done').css(
+            'display',
+          ) === 'block'
         ) {
-          localStorage.setItem('form-submitted', 'true');
-          hidePaywall();
-          hideCallback && hideCallback(true);
+          localStorage.setItem('form-submitted', 'true')
+          hidePaywall()
+          hideCallback && hideCallback(true)
         }
-      }, 2000);
-    });
+      }, 2000)
+    })
 
     if (!options.canBack) {
-      $('.link-2.w--current').css('display', 'none');
-      $('.button---grey.w-button').css('display', 'none');
+      $('.link-2.w--current').css('display', 'none')
+      $('.button---grey.w-button').css('display', 'none')
     }
 
     /* Back button click in old overlay*/
     $('.link-2.w--current').on('click', (e) => {
-      e.preventDefault();
-      hidePaywall();
-      hideCallback && hideCallback(false);
-    });
+      e.preventDefault()
+      hidePaywall()
+      hideCallback && hideCallback(false)
+    })
 
     /* Back button click in new overlay */
     $('.button---grey.w-button').on('click', (e) => {
-      e.preventDefault();
-      hidePaywall();
-      hideCallback && hideCallback(false);
-    });
+      e.preventDefault()
+      hidePaywall()
+      hideCallback && hideCallback(false)
+    })
   }
 
   /**
    * Custom tooltips (V3 feature)
    */
   const pelotonCustomTooltip = (tooltipConfig) => {
-    let tooltipEl = document.getElementById('chartjs-tooltip');
+    let tooltipEl = document.getElementById('chartjs-tooltip')
 
     if (!tooltipEl) {
-      tooltipEl = document.createElement('div');
-      tooltipEl.id = 'chartjs-tooltip';
+      tooltipEl = document.createElement('div')
+      tooltipEl.id = 'chartjs-tooltip'
 
-      document.body.appendChild(tooltipEl);
+      document.body.appendChild(tooltipEl)
     }
 
-    tooltipEl.style.transition = 'all 200ms ease';
-    tooltipEl.style.position = 'absolute';
-    tooltipEl.style.pointerEvents = 'none';
-    tooltipEl.style.zIndex = '200000';
+    tooltipEl.style.transition = 'all 200ms ease'
+    tooltipEl.style.position = 'absolute'
+    tooltipEl.style.pointerEvents = 'none'
+    tooltipEl.style.zIndex = '200000'
 
     return function (tooltipModel) {
       if (tooltipModel.opacity === 0) {
-        tooltipEl.style.opacity = 0;
+        tooltipEl.style.opacity = 0
         return
       }
 
-      tooltipEl.classList.remove('above', 'below', 'no-transform');
+      tooltipEl.classList.remove('above', 'below', 'no-transform')
       tooltipEl.classList.add(
         tooltipModel.yAlign ? tooltipModel.yAlign : 'no-transform',
-      );
+      )
 
       const label = tooltipConfig.label
         ? tooltipConfig.label(tooltipModel.dataPoints[0])
-        : '';
+        : ''
       const value = tooltipConfig.value
         ? tooltipConfig.value(tooltipModel.dataPoints[0])
-        : '';
+        : ''
       const date = tooltipConfig.date
         ? tooltipConfig.date(tooltipModel.dataPoints[0])
-        : tooltipModel.title.slice().shift();
+        : tooltipModel.title.slice().shift()
 
       tooltipEl.innerHTML = [
         '<div style="position: relative; background: #251B39; padding: 20px 12px; border-radius: 4px;">',
@@ -615,23 +853,23 @@
           : '',
         '<div style="bottom: -8px; position: absolute; width: 0; height: 0; border-style: solid; border-width: 8px 8px 0 8px; border-color: #251B39 transparent transparent transparent;"></div>',
         '</div>',
-      ].join('');
+      ].join('')
 
-      const position = this._chart.canvas.getBoundingClientRect();
-      const { height } = tooltipEl.getBoundingClientRect();
+      const position = this._chart.canvas.getBoundingClientRect()
+      const { height } = tooltipEl.getBoundingClientRect()
 
-      tooltipEl.style.opacity = 1;
+      tooltipEl.style.opacity = 1
       tooltipEl.style.left =
-        position.left + window.pageXOffset + tooltipModel.caretX - 20 + 'px';
+        position.left + window.pageXOffset + tooltipModel.caretX - 20 + 'px'
       tooltipEl.style.top =
         position.top +
         window.pageYOffset +
         tooltipModel.caretY -
         height -
         13 +
-        'px';
+        'px'
     }
-  };
+  }
 
   function momWowRender() {
     // window.cardify.loadScript('https://d2j940tllnytyh.cloudfront.net/cardify/index/data/wow-mom.js')
@@ -646,43 +884,43 @@
       Computers: 'computers',
       'Personal Care': 'care',
       Beauty: 'beauty',
-    };
+    }
 
-    let data = {};
+    let data = {}
     for (const key in INDUSTRY_VALUES) {
-      const value = INDUSTRY_VALUES[key];
+      const value = INDUSTRY_VALUES[key]
 
-      const last = value[value.length - 1];
-      const prelast = value[value.length - 2];
+      const last = value[value.length - 1]
+      const prelast = value[value.length - 2]
 
-      const lastsum = value.slice(-4).reduce((acc, i) => acc + i, 0);
-      const prelastsum = value.slice(-8, -4).reduce((acc, i) => acc + i, 0);
+      const lastsum = value.slice(-4).reduce((acc, i) => acc + i, 0)
+      const prelastsum = value.slice(-8, -4).reduce((acc, i) => acc + i, 0)
 
       data[NAME_MAPPING[key]] = {
         wow: (100 * (last - prelast)) / prelast,
         mom: (100 * (lastsum - prelastsum)) / prelastsum,
-      };
+      }
     }
 
-    console.log('Index wow mom data', data);
+    console.log('Index wow mom data', data)
 
     $('.wow-mom-change').each(function () {
-      const type = $(this).attr('data-type');
-      const industry = $(this).attr('data-industry');
+      const type = $(this).attr('data-type')
+      const industry = $(this).attr('data-industry')
 
       try {
-        const value = data[industry][type];
+        const value = data[industry][type]
 
         $(this).text(
           `${value.toFixed(1)}% ${type === 'wow' ? 'WoW' : 'MoM'} ${
-          value > 0 ? '▲' : '▼'
-        }`,
-        );
-        $(this).removeClass('wow-mom---small-decline');
-        $(this).removeClass('wow-mom---small-incline');
+            value > 0 ? '▲' : '▼'
+          }`,
+        )
+        $(this).removeClass('wow-mom---small-decline')
+        $(this).removeClass('wow-mom---small-incline')
         $(this).addClass(
           value > 0 ? 'wow-mom---small-incline' : 'wow-mom---small-decline',
-        );
+        )
       } catch (error) {
         console.error(
           'Cannot fill wow mom for',
@@ -690,28 +928,30 @@
           industry,
           'becaus of',
           error,
-        );
+        )
       }
-    });
+    })
 
     $('.wow-mom-card').each(function () {
-      const type = $(this).attr('data-type');
-      const industry = $(this).attr('data-industry');
+      const type = $(this).attr('data-type')
+      const industry = $(this).attr('data-industry')
 
       try {
-        const value = data[industry][type];
+        const value = data[industry][type]
 
-        const arrow = $(this.querySelector('[class^="arrow"]'));
-        const text = $(this.querySelector('[class^="wow"]'));
+        const arrow = $(this.querySelector('[class^="arrow"]'))
+        const text = $(this.querySelector('[class^="wow"]'))
 
-        $(arrow).text(value > 0 ? '↑' : '↓');
-        $(arrow).removeClass('arrow-up');
-        $(arrow).removeClass('arrow-down');
-        $(arrow).addClass(value > 0 ? 'arrow-up' : 'arrow-down');
-        $(text).text(`${value.toFixed(1)}% ${type === 'wow' ? 'WoW' : 'MoM'}`);
-        $(text).removeClass('wow---incline-text');
-        $(text).removeClass('wow---decline-text');
-        $(text).addClass(value > 0 ? 'wow---incline-text' : 'wow---decline-text');
+        $(arrow).text(value > 0 ? '↑' : '↓')
+        $(arrow).removeClass('arrow-up')
+        $(arrow).removeClass('arrow-down')
+        $(arrow).addClass(value > 0 ? 'arrow-up' : 'arrow-down')
+        $(text).text(`${value.toFixed(1)}% ${type === 'wow' ? 'WoW' : 'MoM'}`)
+        $(text).removeClass('wow---incline-text')
+        $(text).removeClass('wow---decline-text')
+        $(text).addClass(
+          value > 0 ? 'wow---incline-text' : 'wow---decline-text',
+        )
       } catch (error) {
         console.error(
           'Cannot fill wow mom for',
@@ -719,9 +959,9 @@
           industry,
           'becaus of',
           error,
-        );
+        )
       }
-    });
+    })
 
     /**
      * State Charts data
@@ -763,139 +1003,139 @@
         data:
           '[100, 149, 106, 113, 142, 161, 111, 88, 65, 104, 68, 80, 115, 139, 151, 111, 137, 141, 150]',
       },
-    ];
+    ]
 
     STATE_CHARTS_DATA.forEach(({ state, industry, data }) => {
-      $(`.state-chart[data-state="${state}"][data-industry="${industry}"]`).each(
-        function () {
-          const node = $(this);
+      $(
+        `.state-chart[data-state="${state}"][data-industry="${industry}"]`,
+      ).each(function () {
+        const node = $(this)
 
-          /* Draw chart */
-          const placeholder = node[0].querySelector('.graph-placeholder---large');
+        /* Draw chart */
+        const placeholder = node[0].querySelector('.graph-placeholder---large')
 
-          const COLORS = {
-            red: '#CE4645',
-            green: '#407578',
-          };
+        const COLORS = {
+          red: '#CE4645',
+          green: '#407578',
+        }
 
-          const container = document.createElement('div');
-          container.setAttribute('style', 'height: 100%; width: 100%;');
-          // this.style.padding = '20px';
-          placeholder.appendChild(container);
+        const container = document.createElement('div')
+        container.setAttribute('style', 'height: 100%; width: 100%;')
+        // this.style.padding = '20px';
+        placeholder.appendChild(container)
 
-          // const industryName = $(this).attr('data-industry');
-          let values;
-          try {
-            values = JSON.parse(data);
-          } catch (err) {
-            console.error(err);
-          }
+        // const industryName = $(this).attr('data-industry');
+        let values
+        try {
+          values = JSON.parse(data)
+        } catch (err) {
+          console.error(err)
+        }
 
-          if (!values) {
-            console.error('Industry ', industryName, ' is unknown.');
-            return
-          }
+        if (!values) {
+          console.error('Industry ', industryName, ' is unknown.')
+          return
+        }
 
-          const { width, height } = container.getBoundingClientRect();
-          const canvas = document.createElement('CANVAS');
-          canvas.width = width;
-          canvas.height = height;
-          canvas.style.width = '100%';
-          canvas.style.height = height + 'px';
+        const { width, height } = container.getBoundingClientRect()
+        const canvas = document.createElement('CANVAS')
+        canvas.width = width
+        canvas.height = height
+        canvas.style.width = '100%'
+        canvas.style.height = height + 'px'
 
-          container.appendChild(canvas);
+        container.appendChild(canvas)
 
-          const positive =
-            values[values.length - 1] - values[values.length - 2] > 0;
+        const positive =
+          values[values.length - 1] - values[values.length - 2] > 0
 
-          new Chart(canvas.getContext('2d'), {
-            type: 'line',
-            data: {
-              labels: new Array(19).fill(''),
-              datasets: [
+        new Chart(canvas.getContext('2d'), {
+          type: 'line',
+          data: {
+            labels: new Array(19).fill(''),
+            datasets: [
+              {
+                data: values,
+                fill: false,
+                borderWidth: 2,
+                borderColor: positive ? COLORS.green : COLORS.red,
+                pointBackgroundColor: 'rgba(0, 0, 0, 0)',
+                pointBorderColor: 'rgba(0, 0, 0, 0)',
+                pointHoverBorderColor: 'rgba(0, 0, 0, 0)',
+                pointHitRadius: 30,
+              },
+            ],
+          },
+          options: {
+            legend: { display: false },
+            tooltips: { display: false, enabled: false },
+            scales: {
+              xAxes: [
                 {
-                  data: values,
-                  fill: false,
-                  borderWidth: 2,
-                  borderColor: positive ? COLORS.green : COLORS.red,
-                  pointBackgroundColor: 'rgba(0, 0, 0, 0)',
-                  pointBorderColor: 'rgba(0, 0, 0, 0)',
-                  pointHoverBorderColor: 'rgba(0, 0, 0, 0)',
-                  pointHitRadius: 30,
+                  gridLines: {
+                    display: false,
+                    drawBorder: false,
+                    zeroLineWidth: 0,
+                  },
+                  ticks: { display: false },
+                },
+              ],
+              yAxes: [
+                {
+                  gridLines: {
+                    lineWidth: 0,
+                    drawBorder: false,
+                    drawOnChartArea: false,
+                    zeroLineWidth: 0,
+                  },
+                  ticks: { display: false },
                 },
               ],
             },
-            options: {
-              legend: { display: false },
-              tooltips: { display: false, enabled: false },
-              scales: {
-                xAxes: [
-                  {
-                    gridLines: {
-                      display: false,
-                      drawBorder: false,
-                      zeroLineWidth: 0,
-                    },
-                    ticks: { display: false },
-                  },
-                ],
-                yAxes: [
-                  {
-                    gridLines: {
-                      lineWidth: 0,
-                      drawBorder: false,
-                      drawOnChartArea: false,
-                      zeroLineWidth: 0,
-                    },
-                    ticks: { display: false },
-                  },
-                ],
-              },
-            },
-          });
+          },
+        })
 
-          const last = values[values.length - 1];
-          const prelast = values[values.length - 2];
+        const last = values[values.length - 1]
+        const prelast = values[values.length - 2]
 
-          const lastsum = values.slice(-4).reduce((acc, i) => acc + i, 0);
-          const prelastsum = values.slice(-8, -4).reduce((acc, i) => acc + i, 0);
+        const lastsum = values.slice(-4).reduce((acc, i) => acc + i, 0)
+        const prelastsum = values.slice(-8, -4).reduce((acc, i) => acc + i, 0)
 
-          const wow = (100 * (last - prelast)) / prelast;
-          const mom = (100 * (lastsum - prelastsum)) / prelastsum;
+        const wow = (100 * (last - prelast)) / prelast
+        const mom = (100 * (lastsum - prelastsum)) / prelastsum
 
-          /* Set title */
-          $(node[0].querySelectorAll('.paragraph-regular.bold')).text(state);
+        /* Set title */
+        $(node[0].querySelectorAll('.paragraph-regular.bold')).text(state)
 
-          /* Set wow moms - skipping for now */
-          $(node[0].querySelectorAll('.wow-mom-change')).each(function () {
-            const type = $(this).attr('data-type');
+        /* Set wow moms - skipping for now */
+        $(node[0].querySelectorAll('.wow-mom-change')).each(function () {
+          const type = $(this).attr('data-type')
 
-            try {
-              const value = type === 'wow' ? wow : mom;
+          try {
+            const value = type === 'wow' ? wow : mom
 
-              $(this).text(
-                `${value.toFixed(1)}% ${type === 'wow' ? 'WoW' : 'MoM'} ${
+            $(this).text(
+              `${value.toFixed(1)}% ${type === 'wow' ? 'WoW' : 'MoM'} ${
                 value > 0 ? '▲' : '▼'
               }`,
-              );
-              $(this).removeClass('wow-mom---small-decline');
-              $(this).removeClass('wow-mom---small-incline');
-              $(this).addClass(
-                value > 0 ? 'wow-mom---small-incline' : 'wow-mom---small-decline',
-              );
-            } catch (error) {
-              console.error(
-                'Cannot fill wow mom for',
-                type,
-                industry,
-                'because of',
-                error,
-              );
-            }
-          });
-        },
-      );
-    });
+            )
+            $(this).removeClass('wow-mom---small-decline')
+            $(this).removeClass('wow-mom---small-incline')
+            $(this).addClass(
+              value > 0 ? 'wow-mom---small-incline' : 'wow-mom---small-decline',
+            )
+          } catch (error) {
+            console.error(
+              'Cannot fill wow mom for',
+              type,
+              industry,
+              'because of',
+              error,
+            )
+          }
+        })
+      })
+    })
   }
 
   function emailValidationInit() {
@@ -908,53 +1148,53 @@
           '@live.com',
           '.me',
           '@yahoo.com',
-        ];
+        ]
 
         const isEmailBanned = bannedEmailDomains.reduce(
           (acc, domain) => acc || $(input).val().endsWith(domain),
           false,
-        );
+        )
         input.setCustomValidity(
           isEmailBanned ? 'Please use your work email address' : '',
-        );
+        )
       },
-    };
+    }
 
     $(document.body).on('input', function (e) {
-      const validation = $(e.target).attr('data-cardify-validation');
+      const validation = $(e.target).attr('data-cardify-validation')
 
       if (validation) {
-        let validationRules = [];
+        let validationRules = []
         try {
-          validationRules = JSON.parse(validation);
+          validationRules = JSON.parse(validation)
         } catch (e) {
-          console.error('Cannot parse validation rules', this, validation);
+          console.error('Cannot parse validation rules', this, validation)
         }
 
         validationRules.forEach((rule) => {
           if (!RULES[rule]) {
-            console.error('The rule has no function', rule);
+            console.error('The rule has no function', rule)
           } else {
-            RULES[rule](e.target);
+            RULES[rule](e.target)
           }
-        });
+        })
       }
-    });
+    })
   }
 
   const loadCardifyIndustry = (industryKey, colorsMapping, bottomLabels) => {
-    Chart.defaults.global.tooltips.displayColors = false;
-    Chart.defaults.global.hover.mode = 'nearest';
-    Chart.defaults.global.hover.intersect = false;
-    Chart.defaults.global.legend.display = false;
-    Chart.defaults.global.responsive = false;
+    Chart.defaults.global.tooltips.displayColors = false
+    Chart.defaults.global.hover.mode = 'nearest'
+    Chart.defaults.global.hover.intersect = false
+    Chart.defaults.global.legend.display = false
+    Chart.defaults.global.responsive = false
 
-    setTimeout(window.cardify.displayPaywall, 2000);
+    setTimeout(window.cardify.displayPaywall, 2000)
 
     const data = window.$cardifyScripts.industryData.filter(
       (entry) => entry.industry === industryKey,
-    );
-    console.log('Finished loading data for page ' + industryKey, data);
+    )
+    console.log('Finished loading data for page ' + industryKey, data)
     window.cardify.showChart('#travel-graph-container', {
       bottomLabels,
       height: 350,
@@ -962,11 +1202,11 @@
       data: {
         labels: data.map((entry) => entry.dates),
         datasets: data.map((entry) => {
-          let data;
+          let data
           try {
-            data = JSON.parse(entry.data);
+            data = JSON.parse(entry.data)
           } catch (error) {
-            console.log(error);
+            console.log(error)
           }
           return {
             ...entry,
@@ -1009,9 +1249,9 @@
         ],
         onChange: ([gender, age], chart) => {
           chart.data.datasets.forEach((dataset) => {
-            dataset.hidden = dataset.gender !== gender || dataset.age !== age;
-          });
-          chart.update();
+            dataset.hidden = dataset.gender !== gender || dataset.age !== age
+          })
+          chart.update()
         },
       },
 
@@ -1031,11 +1271,11 @@
           }),
         },
       }),
-    })[0];
-  };
+    })[0]
+  }
 
-  const randomId = 'industry' + Math.random().toString(16).split('.')[1];
-  document.currentScript.setAttribute('data-content-id', randomId);
+  const randomId = 'industry' + Math.random().toString(16).split('.')[1]
+  document.currentScript.setAttribute('data-content-id', randomId)
 
   window.$cardifyScripts.financialData = [
     {
@@ -1294,10 +1534,10 @@
       data:
         '[100.0, 100.5, 129.6, 179.5, 187.5, 116.8, 198.6, 139.7, 165.6, 83.3, 97.2]',
     },
-  ];
+  ]
 
-  const randomId$1 = 'industry' + Math.random().toString(16).split('.')[1];
-  document.currentScript.setAttribute('data-content-id', randomId$1);
+  const randomId$1 = 'industry' + Math.random().toString(16).split('.')[1]
+  document.currentScript.setAttribute('data-content-id', randomId$1)
 
   window.$cardifyScripts.industryData = [
     {
@@ -2964,10 +3204,10 @@
       data:
         '[100.0, 116.9, 90.6, 100.5, 142.0, 170.2, 127.9, 173.2, 130.3, 114.5, 80.0, 129.9, 110.1, 97.2, 93.2, 80.5, 86.3, 76.2, 105.8, 107.6, 96.5, 75.1, 91.6]',
     },
-  ];
+  ]
 
-  const randomId$2 = 'industry' + Math.random().toString(16).split('.')[1];
-  document.currentScript.setAttribute('data-content-id', randomId$2);
+  const randomId$2 = 'industry' + Math.random().toString(16).split('.')[1]
+  document.currentScript.setAttribute('data-content-id', randomId$2)
 
   window.$cardifyScripts.wowMomData = {
     apparel: { wow: -2.7, mom: 21.4 },
@@ -2981,7 +3221,9 @@
     computer: { wow: -2.6, mom: -8.6 },
     care: { wow: 32.3, mom: 69.9 },
     beauty: { wow: 5.0, mom: -7.5 },
-  };
+  }
+
+  window.$cardifyScripts = {}
 
   window.cardify = {
     showChart,
@@ -2995,10 +3237,9 @@
     loadCardifyIndustry,
     tooltips: { pelotonCustomTooltip },
     loadScript,
-  };
+  }
 
-  document.addEventListener('DOMContentLoaded', showChartPreview);
-  document.addEventListener('DOMContentLoaded', emailValidationInit);
-  document.addEventListener('DOMContentLoaded', momWowRender);
-
-})));
+  document.addEventListener('DOMContentLoaded', showChartPreview)
+  document.addEventListener('DOMContentLoaded', emailValidationInit)
+  document.addEventListener('DOMContentLoaded', momWowRender)
+})
