@@ -1276,7 +1276,7 @@
 
   const randomId = 'industry' + Math.random().toString(16).split('.')[1]
   document.currentScript.setAttribute('data-content-id', randomId)
-
+  window.$cardifyScripts = window.$cardifyScripts || {}
   window.$cardifyScripts.financialData = [
     {
       industry: 'Financial Planning & Investments',
@@ -1538,7 +1538,7 @@
 
   const randomId$1 = 'industry' + Math.random().toString(16).split('.')[1]
   document.currentScript.setAttribute('data-content-id', randomId$1)
-
+  window.$cardifyScripts = window.$cardifyScripts || {}
   window.$cardifyScripts.industryData = [
     {
       industry: 'Apparel & Accessories',
@@ -3208,7 +3208,7 @@
 
   const randomId$2 = 'industry' + Math.random().toString(16).split('.')[1]
   document.currentScript.setAttribute('data-content-id', randomId$2)
-
+  window.$cardifyScripts = window.$cardifyScripts || {}
   window.$cardifyScripts.wowMomData = {
     apparel: { wow: -2.7, mom: 21.4 },
     financial: { wow: 40.5, mom: -17.8 },
